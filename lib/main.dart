@@ -1,9 +1,15 @@
+import 'package:buffalosnowco/dashboard_screen.dart';
+import 'package:buffalosnowco/screens/find_jobs.dart';
+import 'package:buffalosnowco/transition_route_observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'login/login_screen.dart';
+
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -26,17 +32,47 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+        textSelectionTheme:
+            const TextSelectionThemeData(cursorColor: Colors.orange),
+        // fontFamily: 'SourceSansPro',
+        textTheme: TextTheme(
+          headline3: const TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 45.0,
+            // fontWeight: FontWeight.w400,
+            color: Colors.orange,
+          ),
+          button: const TextStyle(
+            // OpenSans is similar to NotoSans but the uppercases look a bit better IMO
+            fontFamily: 'OpenSans',
+          ),
+          caption: TextStyle(
+            fontFamily: 'NotoSans',
+            fontSize: 12.0,
+            fontWeight: FontWeight.normal,
+            color: Colors.deepPurple[300],
+          ),
+          headline1: const TextStyle(fontFamily: 'Quicksand'),
+          headline2: const TextStyle(fontFamily: 'Quicksand'),
+          headline4: const TextStyle(fontFamily: 'Quicksand'),
+          headline5: const TextStyle(fontFamily: 'NotoSans'),
+          headline6: const TextStyle(fontFamily: 'NotoSans'),
+          subtitle1: const TextStyle(fontFamily: 'NotoSans'),
+          bodyText1: const TextStyle(fontFamily: 'NotoSans'),
+          bodyText2: const TextStyle(fontFamily: 'NotoSans'),
+          subtitle2: const TextStyle(fontFamily: 'NotoSans'),
+          overline: const TextStyle(fontFamily: 'NotoSans'),
+        ),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple)
+            .copyWith(secondary: Colors.orange),
       ),
+      navigatorObservers: [TransitionRouteObserver()],
+      initialRoute: LoginScreen.routeName,
+      routes: {
+        LoginScreen.routeName: (context) => const LoginScreen(),
+        DashboardScreen.routeName: (context) => const DashboardScreen(),
+        FindJobsScreen.routeName: (context) => const FindJobsScreen(),
+      },
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
