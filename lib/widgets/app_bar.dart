@@ -52,10 +52,8 @@ class _SnowAppBarState extends State<SnowAppBar> {
               ),
             ),
           ),
-          HeroText(
+          Text(
             Constants.appName,
-            tag: Constants.titleTag,
-            viewState: ViewState.shrunk,
             style: LoginThemeHelper.loginTextStyle,
           ),
           const SizedBox(width: 20),
