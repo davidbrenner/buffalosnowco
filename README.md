@@ -1,6 +1,6 @@
 # buffalosnowco
 
-An app for sidewalk snow removal in the city of Buffalo, NY
+An app for snow removal from every sidewalk in the city of Buffalo, NY
 
 ## Getting Started
 
