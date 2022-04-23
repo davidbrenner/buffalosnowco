@@ -11,10 +11,14 @@ class FindJobsScreen extends StatefulWidget {
 class _FindJobsScreenState extends State<FindJobsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        Text("Find Jobs"),
-      ],
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: const [
+            Text("Find Jobs"),
+          ],
+        ),
+      ),
     );
   }
 }
