@@ -1,5 +1,6 @@
 import 'package:buffalosnowco/dashboard_screen.dart';
 import 'package:buffalosnowco/screens/find_jobs.dart';
+import 'package:buffalosnowco/screens/test.dart';
 import 'package:buffalosnowco/transition_route_observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +68,7 @@ class MyApp extends StatelessWidget {
             .copyWith(secondary: Colors.orange),
       ),
       navigatorObservers: [TransitionRouteObserver()],
-      initialRoute: FindJobsScreen.routeName,
+      initialRoute: LoginScreen.routeName,
       routes: {
         LoginScreen.routeName: (context) => const LoginScreen(),
         DashboardScreen.routeName: (context) => const DashboardScreen(),
