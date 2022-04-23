@@ -1,4 +1,5 @@
 import 'package:buffalosnowco/login/login_screen.dart';
+import 'package:buffalosnowco/widgets/app_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -294,7 +295,7 @@ class _DashboardScreenState extends State<DashboardScreen>
 
     return SafeArea(
       child: Scaffold(
-        appBar: _buildAppBar(theme),
+        appBar: SnowAppBar(),
         body: Container(
           width: double.infinity,
           height: double.infinity,

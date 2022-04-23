@@ -1,3 +1,4 @@
+import 'package:buffalosnowco/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 
 class FindJobsScreen extends StatefulWidget {
@@ -13,6 +14,7 @@ class _FindJobsScreenState extends State<FindJobsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: SnowAppBar(),
         body: Column(
           children: const [
             Text("Find Jobs"),
