@@ -197,7 +197,7 @@ class _DashboardScreenState extends State<DashboardScreen>
             interval: const Interval(0, aniInterval),
             onPressed: () {
               print("Find jobs pressed");
-              Navigator.of(context).pushNamed(LoginScreen.routeName);
+              Navigator.of(context).pushNamed('/jobs');
             }),
         _buildButton(
           onPressed: () {
@@ -292,51 +292,48 @@ class _DashboardScreenState extends State<DashboardScreen>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return WillPopScope(
-      onWillPop: () => _goToLogin(context),
-      child: SafeArea(
-        child: Scaffold(
-          appBar: _buildAppBar(theme),
-          body: Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: theme.primaryColor.withOpacity(.1),
-            child: Stack(
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    const SizedBox(height: 40),
-                    Expanded(
-                      flex: 2,
-                      child: _buildHeader(theme),
+    return SafeArea(
+      child: Scaffold(
+        appBar: _buildAppBar(theme),
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: theme.primaryColor.withOpacity(.1),
+          child: Stack(
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  const SizedBox(height: 40),
+                  Expanded(
+                    flex: 2,
+                    child: _buildHeader(theme),
+                  ),
+                  Expanded(
+                    flex: 8,
+                    child: ShaderMask(
+                      // blendMode: BlendMode.srcOver,
+                      shaderCallback: (Rect bounds) {
+                        return LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          tileMode: TileMode.clamp,
+                          colors: <Color>[
+                            Colors.deepPurpleAccent.shade100,
+                            Colors.deepPurple.shade100,
+                            Colors.deepPurple.shade100,
+                            Colors.deepPurple.shade100,
+                            // Colors.red,
+                            // Colors.yellow,
+                          ],
+                        ).createShader(bounds);
+                      },
+                      child: _buildDashboardGrid(),
                     ),
-                    Expanded(
-                      flex: 8,
-                      child: ShaderMask(
-                        // blendMode: BlendMode.srcOver,
-                        shaderCallback: (Rect bounds) {
-                          return LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            tileMode: TileMode.clamp,
-                            colors: <Color>[
-                              Colors.deepPurpleAccent.shade100,
-                              Colors.deepPurple.shade100,
-                              Colors.deepPurple.shade100,
-                              Colors.deepPurple.shade100,
-                              // Colors.red,
-                              // Colors.yellow,
-                            ],
-                          ).createShader(bounds);
-                        },
-                        child: _buildDashboardGrid(),
-                      ),
-                    ),
-                  ],
-                ),
-                if (!kReleaseMode) _buildDebugButtons(),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              if (!kReleaseMode) _buildDebugButtons(),
+            ],
           ),
         ),
       ),
