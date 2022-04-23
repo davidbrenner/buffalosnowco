@@ -203,6 +203,7 @@ class _DashboardScreenState extends State<DashboardScreen>
         _buildButton(
           onPressed: () {
             print("Create request pressed");
+            Navigator.of(context).pushNamed('/jobs/create');
           },
           icon: Container(
             // fix icon is not centered like others for some reasons
