@@ -1,4 +1,5 @@
 import 'package:buffalosnowco/widgets/app_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -92,6 +93,10 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
                             'description':
                                 _formKey.currentState!.value['description'],
                             'address': _formKey.currentState!.value['address'],
+                            'createdAt': DateTime.now(),
+                            'createdBy':
+                                FirebaseAuth.instance.currentUser?.uid ??
+                                    "Anonymous",
                           });
                           await showDialog(
                               context: context,
