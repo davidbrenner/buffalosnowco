@@ -1,3 +1,5 @@
+import 'package:buffalosnowco/models/job_detail.dart';
+import 'package:buffalosnowco/screens/job_details_screen.dart';
 import 'package:buffalosnowco/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -17,34 +19,63 @@ class _FindJobsScreenState extends State<FindJobsScreen> {
   final Stream<QuerySnapshot> _jobsStream =
       FirebaseFirestore.instance.collection('jobs').snapshots();
 
+  Route _createRoute(Widget screen) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => screen,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: SnowAppBar(),
-        body: StreamBuilder<QuerySnapshot>(
-          stream: _jobsStream,
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasError) {
-              return const Text('Something went wrong');
-            }
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: Theme.of(context).primaryColor.withOpacity(.1),
+          child: StreamBuilder<QuerySnapshot>(
+            stream: _jobsStream,
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasError) {
+                return const Text('Something went wrong');
+              }
 
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
-            }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              }
 
-            return ListView(
-              children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                Map<String, dynamic> data =
-                    document.data()! as Map<String, dynamic>;
-                return ListTile(
-                  title: Text(data['title']),
-                  subtitle: Text(data['description']),
-                );
-              }).toList(),
-            );
-          },
+              return ListView(
+                children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                  Map<String, dynamic> data =
+                      document.data()! as Map<String, dynamic>;
+                  return ListTile(
+                    title: Text(data['title']),
+                    subtitle: Text(data['description']),
+                    onTap: () {
+                      Navigator.of(context).push(_createRoute(JobsDetailsScreen(
+                        job: JobDetail.fromJson(data),
+                      )));
+                    },
+                  );
+                }).toList(),
+              );
+            },
+          ),
         ),
       ),
     );
