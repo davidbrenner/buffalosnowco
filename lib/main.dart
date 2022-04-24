@@ -35,14 +35,14 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         textSelectionTheme:
-            const TextSelectionThemeData(cursorColor: Colors.orange),
+            const TextSelectionThemeData(cursorColor: Color(0xffffd200)),
         textTheme: GoogleFonts.montserratTextTheme(),
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple)
-            .copyWith(secondary: Colors.orange),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+            .copyWith(secondary: Colors.yellow),
       ),
       navigatorObservers: [TransitionRouteObserver()],
-      //initialRoute: LoginScreen.routeName,
-      initialRoute: DashboardScreen.routeName,
+      initialRoute: LoginScreen.routeName,
+      //initialRoute: DashboardScreen.routeName,
       routes: {
         DashboardScreen.routeName: (context) => const DashboardScreen(),
         LoginScreen.routeName: (context) => const LoginScreen(),
