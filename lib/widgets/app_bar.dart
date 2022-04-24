@@ -73,7 +73,7 @@ class _SnowAppBarState extends State<SnowAppBar> {
         signOutBtn,
       ],
       title: title,
-      backgroundColor: theme.primaryColor.withOpacity(.1),
+      backgroundColor: Colors.blue,
       elevation: 0,
       // toolbarTextStyle: TextStle(),
       // textTheme: theme.accentTextTheme,

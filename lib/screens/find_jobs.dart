@@ -46,7 +46,7 @@ class _FindJobsScreenState extends State<FindJobsScreen> {
         body: Container(
           width: double.infinity,
           height: double.infinity,
-          color: Theme.of(context).primaryColor.withOpacity(.1),
+          color: Colors.white,
           child: StreamBuilder<QuerySnapshot>(
             stream: _jobsStream,
             builder:
@@ -63,14 +63,31 @@ class _FindJobsScreenState extends State<FindJobsScreen> {
                 children: snapshot.data!.docs.map((DocumentSnapshot document) {
                   Map<String, dynamic> data =
                       document.data()! as Map<String, dynamic>;
-                  return ListTile(
-                    title: Text(data['title']),
-                    subtitle: Text(data['description']),
-                    onTap: () {
-                      Navigator.of(context).push(_createRoute(JobsDetailsScreen(
-                        job: JobDetail.fromJson(data),
-                      )));
-                    },
+                  bool completed = data['status'] == 'Completed';
+                  bool standard = data['type'] == 'standard';
+                  return Column(
+                    children: [
+                      ListTile(
+                        title: Text(data['title']),
+                        subtitle: Text(data['description']),
+                        leading: (Icon(
+                          completed
+                              ? Icons.check
+                              : (standard ? Icons.map : Icons.warning),
+                          color: completed
+                              ? Colors.green
+                              : (standard ? null : Colors.yellow),
+                        )),
+                        onTap: () {
+                          Navigator.of(context)
+                              .push(_createRoute(JobsDetailsScreen(
+                            job: JobDetail.fromJson(data),
+                            jobDoc: document.reference,
+                          )));
+                        },
+                      ),
+                      Divider(),
+                    ],
                   );
                 }).toList(),
               );

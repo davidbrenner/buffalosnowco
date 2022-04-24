@@ -9,7 +9,9 @@ import '../models/job_detail.dart';
 class JobsDetailsScreen extends StatefulWidget {
   static const routeName = '/jobs';
   final JobDetail job;
-  const JobsDetailsScreen({Key? key, required this.job}) : super(key: key);
+  final DocumentReference jobDoc;
+  const JobsDetailsScreen({Key? key, required this.job, required this.jobDoc})
+      : super(key: key);
 
   @override
   _JobsDetailsScreenState createState() => _JobsDetailsScreenState();
@@ -28,7 +30,7 @@ class _JobsDetailsScreenState extends State<JobsDetailsScreen> {
         body: Container(
           width: double.infinity,
           height: double.infinity,
-          color: Theme.of(context).primaryColor.withOpacity(.1),
+          color: Colors.white,
           padding: const EdgeInsets.all(10),
           child: Card(
             child: Stack(
@@ -85,7 +87,10 @@ class _JobsDetailsScreenState extends State<JobsDetailsScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           ElevatedButton(
-                              onPressed: () {}, child: Text("Claim")),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("Claim")),
                         ],
                       ),
                     ),
