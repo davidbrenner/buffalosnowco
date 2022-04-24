@@ -4,6 +4,7 @@ import 'package:buffalosnowco/screens/find_jobs.dart';
 import 'package:buffalosnowco/transition_route_observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -35,35 +36,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textSelectionTheme:
             const TextSelectionThemeData(cursorColor: Colors.orange),
-        // fontFamily: 'SourceSansPro',
-        textTheme: TextTheme(
-          headline3: const TextStyle(
-            fontFamily: 'OpenSans',
-            fontSize: 45.0,
-            // fontWeight: FontWeight.w400,
-            color: Colors.orange,
-          ),
-          button: const TextStyle(
-            // OpenSans is similar to NotoSans but the uppercases look a bit better IMO
-            fontFamily: 'OpenSans',
-          ),
-          caption: TextStyle(
-            fontFamily: 'NotoSans',
-            fontSize: 12.0,
-            fontWeight: FontWeight.normal,
-            color: Colors.deepPurple[300],
-          ),
-          headline1: const TextStyle(fontFamily: 'Quicksand'),
-          headline2: const TextStyle(fontFamily: 'Quicksand'),
-          headline4: const TextStyle(fontFamily: 'Quicksand'),
-          headline5: const TextStyle(fontFamily: 'NotoSans'),
-          headline6: const TextStyle(fontFamily: 'NotoSans'),
-          subtitle1: const TextStyle(fontFamily: 'NotoSans'),
-          bodyText1: const TextStyle(fontFamily: 'NotoSans'),
-          bodyText2: const TextStyle(fontFamily: 'NotoSans'),
-          subtitle2: const TextStyle(fontFamily: 'NotoSans'),
-          overline: const TextStyle(fontFamily: 'NotoSans'),
-        ),
+        textTheme: GoogleFonts.montserratTextTheme(),
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple)
             .copyWith(secondary: Colors.orange),
       ),
