@@ -42,19 +42,18 @@ class _SnowAppBarState extends State<SnowAppBar> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Hero(
-              tag: Constants.logoTag,
-              child: Image.asset(
-                'assets/images/logo.png',
-                filterQuality: FilterQuality.high,
-                height: 30,
-              ),
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+            child: Image.asset(
+              'assets/images/logo.png',
+              filterQuality: FilterQuality.high,
+              height: 30,
             ),
           ),
           Text(
             Constants.appName,
-            style: LoginThemeHelper.loginTextStyle,
+            style: theme.textTheme.headline6!.copyWith(
+                color: theme.colorScheme.secondary,
+                fontWeight: FontWeight.bold),
           ),
           const SizedBox(width: 20),
         ],
